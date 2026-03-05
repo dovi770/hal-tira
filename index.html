@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>אל תירא - חוסן בממ"ד</title>
+    
+    <!-- טעינת העיצוב (Tailwind) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&display=swap');
+
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            font-family: "Assistant", sans-serif;
+            overflow-x: hidden;
+            margin: 0;
+        }
+
+        .glass-morphism {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(1deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .bento-item-large {
+            grid-column: span 2;
+        }
+
+        /* התאמה לטלפונים ניידים */
+        @media (max-width: 768px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+            .bento-item-large {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen p-6 md:p-12">
+
+    <!-- מדור כותרת -->
+    <header class="text-center mb-12 animate-float">
+        <h1 class="text-5xl font-bold text-[#fbbf24] mb-4">אל תירא</h1>
+        <p class="text-xl text-[#10b981] flex items-center justify-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+            <span>המרחב הבטוח של המשפחה בממ"ד</span>
+        </p>
+    </header>
+
+    <!-- מדורי האפליקציה -->
+    <main class="max-w-4xl mx-auto bento-grid">
+        
+        <!-- מדור הרגעה -->
+        <div class="glass-morphism rounded-2xl p-8 bento-item-large transition-all hover:bg-white/10">
+            <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                נשימות והרגעה
+            </h2>
+            <p class="text-gray-300 mb-4">
+                תרגילים מודרכים להרגעה, סיפורים מרגיעים לילדים ומוזיקה שקטה.
+            </p>
+            <button class="bg-[#10b981] text-white px-4 py-2 rounded-lg font-bold hover:bg-[#059669] transition-colors cursor-pointer">
+                התחל תרגיל נשימה
+            </button>
+        </div>
+
+        <!-- מדור יצירה -->
+        <div class="glass-morphism rounded-2xl p-6 transition-all hover:bg-white/10">
+            <h2 class="text-xl font-bold mb-3 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+                הפעלה יצירתית
+            </h2>
+            <p class="text-gray-300 text-sm mb-4">
+                משחקי דמיון, חידות ורעיונות ליצירה משותפת.
+            </p>
+            <button class="bg-white/10 text-white px-4 py-2 rounded-lg text-sm hover:bg-white/20 transition-colors w-full cursor-pointer">
+                בואו נשחק
+            </button>
+        </div>
+
+        <!-- מדור תמיכה -->
+        <div class="glass-morphism rounded-2xl p-6 transition-all hover:bg-white/10">
+            <h2 class="text-xl font-bold mb-3 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                תמיכה ושיתוף
+            </h2>
+            <p class="text-gray-300 text-sm mb-4">
+                מקום לשתף איך אתם מרגישים ולשמור על יומן אישי לתקופה זו.
+            </p>
+            <button class="bg-white/10 text-white px-4 py-2 rounded-lg text-sm hover:bg-white/20 transition-colors w-full cursor-pointer">
+                פתיחת היומן
+            </button>
+        </div>
+
+    </main>
+</body>
+</html>
