@@ -1,123 +1,156 @@
-@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;800&display=swap');
 
-body {
-    background-color: #f0f9ff; /* צבע שמיים בהיר */
-    color: #334155;
-    font-family: "Assistant", sans-serif;
-    overflow: hidden; 
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+body{
+    font-family: 'Rubik', sans-serif;
+    background: linear-gradient(180deg,#e0f2fe,#f0f9ff);
+    min-height:100vh;
+    overflow-x:hidden;
 }
 
-#app-container {
-    width: 100%;
-    max-width: 400px;
-    height: 100vh;
-    max-height: 850px;
-    background: linear-gradient(180deg, #e0f2fe 0%, #bae6fd 100%);
-    position: relative;
-    box-shadow: 0 0 30px rgba(0,0,0,0.1);
-    overflow-y: auto;
-    overflow-x: hidden;
-    scrollbar-width: none;
-}
-#app-container::-webkit-scrollbar { display: none; }
-
-/* אנימציות */
-@keyframes slideIn {
-    from { transform: translateX(-50%); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
-}
-@keyframes bounceSlow {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+/* רקע בועות */
+body::before{
+    content:"";
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-image:
+    radial-gradient(circle at 20% 20%,rgba(255,255,255,0.6) 6px,transparent 7px),
+    radial-gradient(circle at 70% 40%,rgba(255,255,255,0.5) 8px,transparent 9px),
+    radial-gradient(circle at 40% 80%,rgba(255,255,255,0.4) 10px,transparent 11px);
+    animation:floatBg 25s linear infinite;
+    z-index:-1;
 }
 
-.animate-slide { animation: slideIn 0.3s ease-out forwards; }
-.animate-bounce-slow { animation: bounceSlow 3s ease-in-out infinite; }
-
-.btn-press { transition: transform 0.1s; }
-.btn-press:active { transform: scale(0.95); }
-
-/* כרטיסיות בהירות */
-.cute-card {
-    border-radius: 20px;
-    box-shadow: 0 8px 20px rgba(14, 165, 233, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.5);
+@keyframes floatBg{
+    from{transform:translateY(0)}
+    to{transform:translateY(-200px)}
 }
 
-.screen { display: none; }
-.screen.active { display: block; }
-
-/* כפתור חזרה יפה */
-.btn-back {
-    background: rgba(255, 255, 255, 0.7);
-    color: #0284c7;
-    font-weight: bold;
-    padding: 8px 16px;
-    border-radius: 12px;
-    margin-bottom: 20px;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
-.btn-back:active { transform: scale(0.95); }
-
-/* טיק טאק טו */
-#tic-tac-toe-board {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    width: 260px;
-    height: 260px;
-    margin: 0 auto;
-    gap: 8px;
-    background-color: #cbd5e1;
-    border: 8px solid #cbd5e1;
-    border-radius: 16px;
-}
-.tic-tac-toe-cell {
-    background-color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 3.5em;
-    font-weight: 800;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: background-color 0.2s;
-}
-.tic-tac-toe-cell.x { color: #ef4444; }
-.tic-tac-toe-cell.o { color: #3b82f6; }
-
-/* חידונים */
-.trivia-item {
-    background: white;
-    border: 2px solid #e2e8f0;
-    border-radius: 16px;
-    padding: 16px;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-.trivia-item.active {
-    border-color: #34d399;
-    background: #ecfdf5;
-}
-.trivia-answer {
-    display: none;
-    margin-top: 12px;
-    padding-top: 12px;
-    border-top: 1px dashed #cbd5e1;
-    color: #059669;
-    font-weight: 600;
+/* כרטיסים */
+.cute-card{
+    border-radius:22px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+    transition:all .25s;
 }
 
-/* טקסט קריאה (יישור לשני הצדדים) */
-.text-justify {
-    text-align: justify;
-    text-justify: inter-word;
+.cute-card:hover{
+    transform:translateY(-4px) scale(1.02);
+    box-shadow:0 14px 30px rgba(0,0,0,0.12);
+}
+
+/* כפתורים */
+.btn-press{
+    transition:all .15s;
+}
+
+.btn-press:active{
+    transform:scale(.92);
+}
+
+/* כפתור חזרה */
+.btn-back{
+    background:#38bdf8;
+    color:white;
+    padding:10px 16px;
+    border-radius:12px;
+    font-weight:bold;
+    margin-bottom:16px;
+    display:inline-block;
+    box-shadow:0 4px 10px rgba(0,0,0,.15);
+}
+
+/* מסכים */
+.screen{
+    display:none;
+    opacity:0;
+}
+
+.screen.active{
+    display:block;
+    animation:fadeSlide .5s ease;
+    opacity:1;
+}
+
+@keyframes fadeSlide{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* אנימציית ינשוף */
+.animate-bounce-slow{
+    animation:bounceSlow 3s infinite;
+}
+
+@keyframes bounceSlow{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-10px)}
+}
+
+/* לוח איקס עיגול */
+#tic-tac-toe-board{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.tic-tac-toe-cell{
+    background:#f1f5f9;
+    border-radius:16px;
+    height:80px;
+    font-size:40px;
+    font-weight:bold;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    transition:all .2s;
+}
+
+.tic-tac-toe-cell:hover{
+    background:#e0f2fe;
+    transform:scale(1.05);
+}
+
+/* שאלות טריוויה */
+.trivia-card{
+    background:white;
+    border-radius:18px;
+    padding:16px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.08);
+    cursor:pointer;
+    transition:all .25s;
+}
+
+.trivia-card:hover{
+    transform:scale(1.03);
+}
+
+.trivia-answer{
+    margin-top:10px;
+    color:#0284c7;
+    font-weight:bold;
+}
+
+/* טקסט קריאה */
+#reader-content{
+    line-height:1.9;
+}
+
+/* גלילה יפה */
+::-webkit-scrollbar{
+    width:8px;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#7dd3fc;
+    border-radius:10px;
 }
