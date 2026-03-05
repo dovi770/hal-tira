@@ -1,251 +1,157 @@
 <!DOCTYPE html>
-
 <html lang="he" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>אל תירא - המקום הבטוח שלכם</title>
+    <style>
+        :root {
+            --primary: #4A90E2;
+            --secondary: #FFD93D;
+            --accent: #FF6B6B;
+            --bg: #F0F7FF;
+            --text: #333;
+        }
 
-<title>אל תירא - חברים בממ"ד</title>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-<script src="https://cdn.tailwindcss.com"></script>
+        header {
+            background: var(--primary);
+            color: white;
+            width: 100%;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700;900&display=swap" rel="stylesheet">
+        h1 { margin: 0; font-size: 3rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
+        p.subtitle { font-size: 1.2rem; margin-top: 10px; }
 
-<link rel="stylesheet" href="style.css">
+        .container {
+            max-width: 1000px;
+            width: 90%;
+            margin: 2rem auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
 
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            border: 3px solid transparent;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border-color: var(--secondary);
+        }
+
+        .icon { font-size: 4rem; margin-bottom: 1rem; }
+        .card h2 { color: var(--primary); margin-bottom: 10px; }
+
+        #activity-zone {
+            width: 90%;
+            max-width: 800px;
+            background: white;
+            margin: 2rem auto;
+            padding: 2rem;
+            border-radius: 30px;
+            display: none;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .btn-back {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        footer { margin-top: auto; padding: 20px; color: #888; }
+    </style>
 </head>
+<body>
 
-<body class="app-body">
-
-<div class="animated-background"></div>
-
-<!-- אפקטים קוליים -->
-
-<audio id="sound-pop" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3" preload="auto"></audio> <audio id="background-music" src="https://audio.jukehost.co.uk/5nI10rW44LqXv4M8194j2J0f3t9e0y1v" loop preload="auto"></audio>
-
-<div id="app-container" class="p-6 relative">
-
-<!-- ================= מסך בית ================= -->
-
-<div id="home" class="screen active mt-4 fade-in">
-
-<header class="text-center mb-8">
-
-<div class="text-6xl mb-2 owl">🦉</div>
-
-<h1 class="text-5xl font-extrabold text-sky-600 mb-2 drop-shadow-md">
-אל תירא
-</h1>
-
-<p class="text-lg text-sky-500 font-bold">
-המחנה השמח שלנו
-</p>
-
+<header>
+    <h1>אל תירא 🛡️</h1>
+    <p class="subtitle">החברים שלכם בממ"ד: משחקים, לומדים ונהנים!</p>
 </header>
 
-<div class="space-y-4">
-
-<!-- זמן משחק -->
-
-<div onclick="navigateTo('games-menu')" class="cute-card hover-card p-4 flex items-center gap-4 cursor-pointer btn-press bg-white">
-
-<div class="bg-emerald-100 p-3 rounded-2xl text-emerald-500 text-3xl">
-🎮
+<div class="container" id="main-menu">
+    <div class="card" onclick="showActivity('games')">
+        <div class="icon">🎮</div>
+        <h2>משחקים</h2>
+        <p>משחקי זיכרון, חידות וכיף להעברת הזמן.</p>
+    </div>
+    <div class="card" onclick="showActivity('stories')">
+        <div class="icon">📚</div>
+        <h2>סיפורים להאזנה</h2>
+        <p>סיפורים מרגיעים ומותחים שיקחו אתכם לעולמות אחרים.</p>
+    </div>
+    <div class="card" onclick="showActivity('learn')">
+        <div class="icon">🧠</div>
+        <h2>לומדים בכיף</h2>
+        <p>סרטונים, ניסויים ביתיים ועובדות מעניינות.</p>
+    </div>
+    <div class="card" onclick="showActivity('relax')">
+        <div class="icon">🧘</div>
+        <h2>זמן להירגע</h2>
+        <p>נשימות, מוזיקה שקטה ותרגילי דמיון מודרך.</p>
+    </div>
 </div>
 
-<div>
-
-<h2 class="text-xl font-bold text-slate-700 mb-1">
-זמן משחק!
-</h2>
-
-<p class="text-slate-500 text-sm">
-איקס עיגול וחידונים
-</p>
-
+<div id="activity-zone">
+    <button class="btn-back" onclick="goBack()">חזרה לתפריט</button>
+    <div id="content-display"></div>
 </div>
 
-</div>
-
-<!-- סיפורי צדיקים -->
-
-<div onclick="navigateTo('stories-menu')" class="cute-card hover-card p-4 flex items-center gap-4 cursor-pointer btn-press bg-white">
-
-<div class="bg-indigo-100 p-3 rounded-2xl text-indigo-500 text-3xl">
-📜
-</div>
-
-<div>
-
-<h2 class="text-xl font-bold text-slate-700 mb-1">
-סיפורי צדיקים
-</h2>
-
-<p class="text-slate-500 text-sm">
-סיפורים מרתקים ומחזקים
-</p>
-
-</div>
-
-</div>
-
-<!-- שער הביטחון -->
-
-<div onclick="navigateTo('bitachon-menu')" class="cute-card hover-card p-4 flex items-center gap-4 cursor-pointer btn-press bg-white">
-
-<div class="bg-amber-100 p-3 rounded-2xl text-amber-500 text-3xl">
-🛡️
-</div>
-
-<div>
-
-<h2 class="text-xl font-bold text-slate-700 mb-1">
-שער הביטחון
-</h2>
-
-<p class="text-slate-500 text-sm">
-לימוד חובת הלבבות
-</p>
-
-</div>
-
-</div>
-
-<!-- מוזיקת רקע -->
-
-<div class="cute-card hover-card p-4 flex items-center justify-between gap-4 bg-white mt-8 border-2 border-sky-200">
-
-<div class="flex items-center gap-4">
-
-<div class="bg-pink-100 p-3 rounded-2xl text-pink-500 text-3xl">
-🎵
-</div>
-
-<div>
-
-<h2 class="text-lg font-bold text-slate-700 mb-1">
-מוזיקת רקע
-</h2>
-
-<p class="text-slate-500 text-xs">
-שיר שמחזק את הביטחון והאמונה
-</p>
-
-</div>
-
-</div>
-
-<button id="toggle-music" class="music-button bg-pink-400 text-white w-12 h-12 rounded-full flex justify-center items-center font-bold text-lg btn-press shadow-md">
-▶️
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- ================= תפריט משחקים ================= -->
-
-<div id="games-menu" class="screen mt-6">
-
-<button onclick="navigateTo('home')" class="btn-back">
-🔙 חזרה לתפריט
-</button>
-
-<h2 class="text-3xl font-bold text-emerald-600 mb-6 text-center">
-במה נשחק? 🎲
-</h2>
-
-<div class="space-y-4">
-
-<button onclick="navigateTo('tictactoe')" class="w-full text-right cute-card hover-card p-5 bg-white btn-press flex items-center gap-3">
-
-<span class="text-2xl">
-⭕
-</span>
-
-<span class="text-xl font-bold text-slate-700">
-איקס עיגול
-</span>
-
-</button>
-
-<button onclick="loadTrivia('trivia'); navigateTo('trivia-screen');" class="w-full text-right cute-card hover-card p-5 bg-white btn-press flex items-center gap-3">
-
-<span class="text-2xl">
-❓
-</span>
-
-<span class="text-xl font-bold text-slate-700">
-טריוויה פסח
-</span>
-
-</button>
-
-<button onclick="loadTrivia('bekiut'); navigateTo('trivia-screen');" class="w-full text-right cute-card hover-card p-5 bg-white btn-press flex items-center gap-3">
-
-<span class="text-2xl">
-🧠
-</span>
-
-<span class="text-xl font-bold text-slate-700">
-חידון בקיאות פסח
-</span>
-
-</button>
-
-</div>
-
-</div>
-
-<!-- משחק איקס עיגול -->
-
-<div id="tictactoe" class="screen mt-6">
-
-<button onclick="navigateTo('games-menu')" class="btn-back">
-🔙 חזרה למשחקים
-</button>
-
-<h2 class="text-3xl font-bold text-emerald-600 mb-6 text-center">
-איקס עיגול
-</h2>
-
-<div class="cute-card p-6 bg-white text-center">
-
-<div id="tic-tac-toe-board">
-
-<div class="tic-tac-toe-cell" data-cell-index="0"></div>
-<div class="tic-tac-toe-cell" data-cell-index="1"></div>
-<div class="tic-tac-toe-cell" data-cell-index="2"></div>
-
-<div class="tic-tac-toe-cell" data-cell-index="3"></div>
-<div class="tic-tac-toe-cell" data-cell-index="4"></div>
-<div class="tic-tac-toe-cell" data-cell-index="5"></div>
-
-<div class="tic-tac-toe-cell" data-cell-index="6"></div>
-<div class="tic-tac-toe-cell" data-cell-index="7"></div>
-<div class="tic-tac-toe-cell" data-cell-index="8"></div>
-
-</div>
-
-<p id="tic-tac-toe-status" class="text-xl font-bold text-slate-700 mb-4 mt-4">
-תורו של: X
-</p>
-
-<button onclick="resetTicTacToe()" class="bg-emerald-500 text-white w-full py-3 rounded-xl font-bold btn-press">
-התחל מחדש
-</button>
-
-</div>
-
-</div>
-
-<!-- מסכי טריוויה וסיפורים נשארים כפי שהיו -->
-
-<script src="data.js"></script>
-
-<script src="app.js"></script>
+<footer>נוצר באהבה עבור ילדי ישראל ❤️</footer>
+
+<script>
+    const content = {
+        games: "<h3>משחק הזיכרון בתהליך טעינה...</h3><p>בינתיים, נסו למצוא 5 חפצים כחולים בחדר!</p>",
+        stories: "<h3>סיפור הגיבורים הקטנים</h3><p>היה היה פעם ילד שגילה שבתוך הממ\"ד שלו יש שער לעולם הקסמים...</p>",
+        learn: "<h3>הידעת?</h3><p>הידעת שחלזונות יכולים לישון שלוש שנים ברציפות? מזל שאנחנו לא חלזונות!</p>",
+        relax: "<h3>נשימות של גיבורים</h3><p>קחו שאיפה עמוקה כאילו אתם מריחים פרח, ונשפו לאט כאילו אתם מכבים נר.</p>"
+    };
+
+    function showActivity(type) {
+        document.getElementById('main-menu').style.display = 'none';
+        const zone = document.getElementById('activity-zone');
+        const display = document.getElementById('content-display');
+        
+        display.innerHTML = content[type];
+        zone.style.display = 'block';
+    }
+
+    function goBack() {
+        document.getElementById('main-menu').style.display = 'grid';
+        document.getElementById('activity-zone').style.display = 'none';
+    }
+</script>
 
 </body>
 </html>
